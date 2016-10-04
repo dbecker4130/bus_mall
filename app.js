@@ -3,7 +3,7 @@
 //set up data
 var allImages = [];
 var previousShown = [];
-var currentShown = [];
+//var currentShown = [];
 
 //var imageNames = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
 
@@ -126,44 +126,41 @@ function eventHandlerClick (event) {
     if(allImages[i].name === choice){
       allImages[i].timesClicked += 1;
       console.log(allImages[i].name + ' has ' + allImages[i].timesClicked + 'clicks');
-}
+    }
 
 //finds out which pictures were clicked
 //converts from 'leftPic, centerPic, rightPic' to actual image name
 //increases that events timesClicked by 1
 //calls displayPics to reload wrapper with 3 new images
 
-displayPics();
-displayPics();
+    displayPics();
+    displayPics();
+  }
 
-var
+  var resultsList = document.getElementById('resultsList');
+  function displayList() {
+    piclist.innerHTML = '';
+    for (var i = 0; i < allImages.length; i++) {
+      var liEl = document.createElement('li');
+      var liEl2 = document.createElement('li');
+      liEl.textContent = allImages[i].name + ' has been selected ' + allImages[i].timesClicked + ' times';
+      liEl2.textContent = allImages[i].name + ' has been selected ' + allImages[i].timesClicked + ' times';
+      picList.appendChild(liEl);
+      picList.appendChild(liEl2);
+    }
+  }
+
+  displayPics();
+  displayList();
+
+}
 
 
 
 
 
 
-//display list
-// var picList = document.getElementById('pic list')
-//   for (var i = 0; i < allImages.length; i++) {
-//     var liEl = document.createElement('li');
-//     liEl.textContent = allImages[i].name + 'has been clicked' + allImages[i].clicks + 'times';
-//     picList.appendChild(liEl);
-//   }
 
-//Kenneth function
-
-// function randomNumberGenerator () {
-//   var choiceOne = Math.floor(Math.random() * 19) + 1;
-//   var choiceTwo = Math.floor(Math.random() * 19) + 1;
-//   var choiceThree = Math.floor(Math.random() * 19) + 1;
-//
-// pictureOne = imgArray[choiceOne]
-//
-// console.log (pictureOne);
-// }
-//
-// randomNumberGenerator();
 
 // Jed function
 // function randomImgs() {
@@ -182,9 +179,7 @@ var
 //    return images;
 // }
 //
-// [8:30]
 // external variables
 //
-// [8:30]
 // var imgArr = [];
 // var imgCache = imgArr.slice(0);
