@@ -26,6 +26,7 @@
 var imageNames = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
 //var inUse = [];
 //var clearImgArray [];
+var imageWrapper = document.getElementById('wrapper');
 
 function Image(name, filepath) {
   this.name = name;
@@ -86,8 +87,10 @@ console.log(imageNames);
 //dispay 1st picture
 
 function displayFirstPic () {
+  var firstPic = document.createElement('first_pic');
+  firstPic.appendChild(imageWrapper)
 
-  var imageContainer = document.getElementById('first_pic');
+
 
 }
 //Kenneth function
