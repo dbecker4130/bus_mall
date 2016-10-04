@@ -5,7 +5,7 @@ var allImages = [];
 var previousShown = [];
 var currentShown = [];
 
-var imageNames = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
+//var imageNames = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
 
 var imageWrapper = document.getElementById('wrapper');
 var left = document.getElementById('left');
@@ -17,81 +17,139 @@ function Image(name) {
   this.filePath = 'img/' + name + '.jpg';
   this.views = 0;
   this.timesCliked = 0;
+  allImages.push(this);
 }
 
+new Image('bag', 'img/bag.jpg');
+new Image('banana', 'img/banana.jpg');
+new Image('bathroom', 'img/bathroom.jpg');
+new Image('boots', 'img/boots.jpg');
+new Image('breakfast', 'img/breakfast.jpg');
+new Image('bubblegum', 'img/bubblegum.jpg');
+new Image('chair', 'img/chair.jpg');
+new Image('cthulhu', 'img/cthulhu.jpg');
+new Image('dog-duck', 'img/dog-duck.jpg');
+new Image('dragon', 'img/dragon.jpg');
+new Image('pen', 'img/pen.jpg');
+new Image('pet-sweep', 'img/pet-sweep.jpg');
+new Image('scissors', 'img/scissors.jpg');
+new Image('shark', 'img/shark.jpg');
+new Image('sweep', 'img/sweep.png');
+new Image('unicorn', 'img/unicorn.jpg');
+new Image('usb', 'img/usb.gif');
+new Image('water-can', 'img/water-can.jpg');
+new Image('wine-glass', 'img/wine-glass.jpg');
 
-new Image('bag', img/bag.jpg);
-new Image('banana', img/banana.jpg);
-new Image('bathroom', img/bathroom.jpg);
-new Image('boots', img/boots.jpg);
-new Image('breakfast', img/breakfast.jpg);
-new Image('bubblegum', img/bubblegum.jpg);
-new Image('chair', img/chair.jpg);
-new Image('cthulhu', img/cthulhu.jpg);
-new Image('dog-duck', img/dog-duck.jpg);
-new Image('dragon', img/dragon.jpg);
-new Image('pen', img/pen.jpg);
-new Image('pet-sweep', img/pet-sweep.jpg);
-new Image('scissors', img/scissors.jpg);
-new Image('shark', img/shark.jpg);
-new Image('sweep', img/sweep.png);
-new Image('unicorn', img/unicorn.jpg);
-new Image('usb', img/usb.gif);
-new Image('water-can', img/water-can.jpg);
-new Image('wine-glass', img/wine-glass.jpg);
-
+console.log('allImages', allImages);
 //Define Actions
 
-for (var i = 0; i < imageNames.length; i++) {
-  allImages.push(new Image(imageNames[i]));
-}
+// for (var i = 0; i < imageNames.length; i++) {
+//   allImages.push(new Image(imageNames[i]));
+// }
 
 function randomNumberGenerator () {
-  var imageNames.length ();
-  return Math.floor(Math.random() * imageNames) + 1;
+  return Math.floor(Math.random() * allImages.length);
 }
-
-imageNames.push(randomNumberGenerator());
-imageNames.push(randomNumberGenerator());
-
-while (imageNames[1] === imageNames [0] || previousArray[0] === imageNames[1] || imageNames[1] === previousArray[1] || imageNames[1] === previousArray[2]) {
-  console.log(imageNames, 'No duplicates between first and second picture');
-  imageNames[0] = randomNumberGenerator();
-}
-imageNames.push(randomNumberGenerator());
-
-while (imageNames[2] === imageNames[0]) {
-  console.log(imageNames, 'No duplicates between first and third picture');
-  imageNames [1] = randomNumberGenerator();
-}
-
-while (imageNames[2] === imageNames[1]) {
-  console.log(imageNames, 'No dupicates between second and third picture');
-  imageNames[2] = randomNumberGenerator();
-}
-console.log(imageNames);
+//
+// imageNames.push(randomNumberGenerator());
+// imageNames.push(randomNumberGenerator());
+//
+// while (imageNames[1] === imageNames [0] || previousShown[0] === imageNames[1] || imageNames[1] === previousShown[1] || imageNames[1] === previousShown[2]) {
+//   console.log(imageNames, 'No duplicates between first and second picture');
+//   imageNames[0] = randomNumberGenerator();
+// }
+// imageNames.push(randomNumberGenerator());
+//
+// while (imageNames[2] === imageNames[0]) {
+//   console.log(imageNames, 'No duplicates between first and third picture');
+//   imageNames [1] = randomNumberGenerator();
+// }
+//
+// while (imageNames[2] === imageNames[1]) {
+//   console.log(imageNames, 'No dupicates between second and third picture');
+//   imageNames[2] = randomNumberGenerator();
+// }
+// console.log(imageNames);
 
 //Execute Actions
 //+++++++++++++++++++++++++++++++++++++++++
 //dispay pictures
 
-function displayPics () {
+function displayPics() {
+  console.log('displayPics');
   //var firstPic = document.getElementById('first_pic');
-var leftPic = randomNumberGenerator(0, allImages.length);
-left.src = allImages[leftPic].path;
-left.alt = allImages[leftPic].name;
-allImages[firstPic].views += 1;
+  var leftPic = randomNumberGenerator();
 
-displayFirstPic()
+  while (leftPic === previousShown[0] || leftPic === previousShown[1] || leftPic === previousShown[2]) {
+    leftPic = randomNumberGenerator();
+  }
+
+  console.log('leftPic: ', leftPic);
+  left.src = allImages[leftPic].filePath;
+
+  var centerPic = randomNumberGenerator();
+
+  while (centerPic === previousShown[0] || centerPic === previousShown[1] || centerPic === previousShown[2] || centerPic === leftPic)  {
+    centerPic = randomNumberGenerator();
+
+  }
+  console.log('centerPic: ', centerPic);
+  center.src = allImages[centerPic].filePath;
+
+  var rightPic = randomNumberGenerator();
+
+  while (rightPic === previousShown[0] || rightPic === previousShown[1] || rightPic === previousShown[2] || rightPic === leftPic || rightPic === centerPic) {
+    rightPic = randomNumberGenerator();
+
+  }
+  console.log('rightPic: ', rightPic);
+  right.src = allImages[rightPic].filePath;
+
+  // reset previousShown fr next time
+  previousShown = [];
+  previousShown.push(leftPic);
+  previousShown.push(centerPic);
+  previousShown.push(rightPic);
+
+
+}
+
+displayPics();
+
+var wrapperEl = document.getElementById('wrapper');
+wrapperEl.addEventListener('click' , eventHandlerClick);
+
+function eventHandlerClick (event) {
+  console.log('event handle click', event);
+  var choice = event.target.id;
+  for (var i = 0; i < allImages.length; i++){
+    if(allImages[i].name === choice){
+      allImages[i].timesClicked += 1;
+      console.log(allImages[i].name + ' has ' + allImages[i].timesClicked + 'clicks');
+}
+
+//finds out which pictures were clicked
+//converts from 'leftPic, centerPic, rightPic' to actual image name
+//increases that events timesClicked by 1
+//calls displayPics to reload wrapper with 3 new images
+
+displayPics();
+displayPics();
+
+var
+
+
+
+
 
 
 //display list
-var picList = document.getElementById('pic list')
-  for (var i = 0; i < allImages.length; i++) {
-    var liEl = document.createElement('li');
-    liEl.textContent = allImages[i].name + 'has been clicked' + allImages[i].clicks + 'times';
-    picList.appendChild(liEl);
-  }
+// var picList = document.getElementById('pic list')
+//   for (var i = 0; i < allImages.length; i++) {
+//     var liEl = document.createElement('li');
+//     liEl.textContent = allImages[i].name + 'has been clicked' + allImages[i].clicks + 'times';
+//     picList.appendChild(liEl);
+//   }
 
 //Kenneth function
 
