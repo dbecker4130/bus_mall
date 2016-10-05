@@ -73,7 +73,7 @@ function displayPics() {
 
   var centerPic = randomNumberGenerator();
 
-  while (centerPic === previousShown[0] || centerPic === previousShown[1] || centerPic === previousShown[2] || centerPic === leftPic)  {
+  while (centerPic === previousShown[0] || centerPic === previousShown[1] || centerPic === previousShown[2] || centerPic === leftPic) {
     centerPic = randomNumberGenerator();
 
   }
@@ -98,16 +98,16 @@ function displayPics() {
 
 }
 
-function displayList() {
-  var resultsList = document.getElementById('resultsList');
-  console.log('resultsList', resultsList);
-  resultsList.innerHTML = '';
-  for (var i = 0; i < allImages.length; i++) {
-    var liEl = document.createElement('li');
-    liEl.textContent = allImages[i].name + ' has been selected ' + allImages[i].timesClicked + ' times';
-    resultsList.appendChild(liEl);
-  }
-}
+// function displayList() {
+//   var resultsList = document.getElementById('resultsList');
+//   console.log('resultsList', resultsList);
+//   resultsList.innerHTML = '';
+//   for (var i = 0; i < allImages.length; i++) {
+//     var liEl = document.createElement('li');
+//     liEl.textContent = allImages[i].name + ' has been selected ' + allImages[i].timesClicked + ' times';
+//     resultsList.appendChild(liEl);
+//   }
+// }
 
 function eventHandlerClick (event) {
   console.log('event handle click', event);
@@ -143,10 +143,17 @@ function eventHandlerClick (event) {
   if (clickCounter === 25) {
     wrapperEl.removeEventListener('click', eventHandlerClick);
     button.addEventListener('click', drawChart);
+    function storeData(){
+      var data = JSON.stringify(allImages);
+      localStorage.setItem('data', data);
+    }
     // displayList(?);
+    storeData();
   }
 
 }
+
+
 
 
 
@@ -211,5 +218,12 @@ function drawChart() {
 }
 
 
-displayPics();
+if (localStorage.getItem('data')) {
+  var stringifiedDataFromLocalStorage = localStorage.getItem('data');
+  allImages = JSON.parse(stringifiedDataFromLocalStorage);
+  displayPics();
+
+} else {
+  displayPics();
+}
 wrapperEl.addEventListener('click' , eventHandlerClick);
