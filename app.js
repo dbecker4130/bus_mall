@@ -155,11 +155,6 @@ function eventHandlerClick (event) {
 
   displayPics();
 
-
-
-
-
-
 }
 
 
@@ -175,7 +170,17 @@ function displayList() {
   }
 }
 
+//++++++++++++++++++++++++++++++++++++++++++
+//CHART
 
+function drawChart() {
+  var canvas = document.getElementById('image-chart');
+  if (canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+
+    ctx.
+  }
+}
 
 
 
