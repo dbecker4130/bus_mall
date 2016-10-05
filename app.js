@@ -7,16 +7,16 @@ var previousShown = [];
 
 //var imageNames = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
 
-var imageWrapper = document.getElementById('wrapper');
+//var imageWrapper = document.getElementById('wrapper');  need to create click outside pic error message
 var left = document.getElementById('left');
 var center = document.getElementById('center');
 var right = document.getElementById('right');
 
-function Image(name) {
+function Image (name, filePath) {
   this.name = name;
   this.filePath = 'img/' + name + '.jpg';
   this.views = 0;
-  this.timesCliked = 0;
+  this.timesClicked = 0;
   allImages.push(this);
 }
 
@@ -40,7 +40,7 @@ new Image('usb', 'img/usb.gif');
 new Image('water-can', 'img/water-can.jpg');
 new Image('wine-glass', 'img/wine-glass.jpg');
 
-console.log('allImages', allImages);
+//console.log('allImages', allImages);
 //Define Actions
 
 // for (var i = 0; i < imageNames.length; i++) {
@@ -76,7 +76,7 @@ function randomNumberGenerator () {
 //dispay pictures
 
 function displayPics() {
-  console.log('displayPics');
+  //console.log('displayPics');
   //var firstPic = document.getElementById('first_pic');
   var leftPic = randomNumberGenerator();
 
@@ -84,7 +84,7 @@ function displayPics() {
     leftPic = randomNumberGenerator();
   }
 
-  console.log('leftPic: ', leftPic);
+  //console.log('leftPic: ', leftPic);
   left.src = allImages[leftPic].filePath;
 
   var centerPic = randomNumberGenerator();
@@ -93,7 +93,7 @@ function displayPics() {
     centerPic = randomNumberGenerator();
 
   }
-  console.log('centerPic: ', centerPic);
+  //console.log('centerPic: ', centerPic);
   center.src = allImages[centerPic].filePath;
 
   var rightPic = randomNumberGenerator();
@@ -102,7 +102,7 @@ function displayPics() {
     rightPic = randomNumberGenerator();
 
   }
-  console.log('rightPic: ', rightPic);
+  //console.log('rightPic: ', rightPic);
   right.src = allImages[rightPic].filePath;
 
   // reset previousShown fr next time
@@ -119,43 +119,61 @@ displayPics();
 var wrapperEl = document.getElementById('wrapper');
 wrapperEl.addEventListener('click' , eventHandlerClick);
 
+var clickCounter = 0;
 function eventHandlerClick (event) {
   console.log('event handle click', event);
+  clickCounter += 1;
+  console.log(clickCounter, 'total clicks');
   var choice = event.target.id;
-  for (var i = 0; i < allImages.length; i++){
-    if(allImages[i].name === choice){
-      allImages[i].timesClicked += 1;
-      console.log(allImages[i].name + ' has ' + allImages[i].timesClicked + 'clicks');
-    }
+  console.log('allImages: ', allImages);
+//   for (var i = 0; i < allImages.length; i++){
+//     if(allImages[i].name === choice){
+//       allImages[i].timesClicked += 1;
+//       console.log(allImages[i].name + ' has ' + allImages[i].timesClicked + 'clicks');
+//     }
+//
+// //finds out which pictures were clicked
+// //converts from 'leftPic, centerPic, rightPic' to actual image name
+// //increases that events timesClicked by 1
+// //calls displayPics to reload wrapper with 3 new images
+//
+//   }
 
-//finds out which pictures were clicked
-//converts from 'leftPic, centerPic, rightPic' to actual image name
-//increases that events timesClicked by 1
-//calls displayPics to reload wrapper with 3 new images
-
-    displayPics();
-    displayPics();
+  if(choice === 'left') {
+    var leftPic = previousShown[0];
+    allImages[leftPic].timesClicked += 1;
   }
-
-  var resultsList = document.getElementById('resultsList');
-  function displayList() {
-    piclist.innerHTML = '';
-    for (var i = 0; i < allImages.length; i++) {
-      var liEl = document.createElement('li');
-      var liEl2 = document.createElement('li');
-      liEl.textContent = allImages[i].name + ' has been selected ' + allImages[i].timesClicked + ' times';
-      liEl2.textContent = allImages[i].name + ' has been selected ' + allImages[i].timesClicked + ' times';
-      picList.appendChild(liEl);
-      picList.appendChild(liEl2);
-    }
+  if(choice === 'center') {
+    var centerPic = previousShown[1];
+    allImages[centerPic].timesClicked += 1;
+  }
+  if(choice === 'right') {
+    var rightPic = previousShown[2];
+    allImages[rightPic].timesClicked += 1;
+    console.log(allImages[rightPic].timesClicked);
   }
 
   displayPics();
-  displayList();
+
+
+
+
+
 
 }
 
 
+function displayList() {
+  var resultsList = document.getElementById('resultsList');
+  console.log('resultsList', resultsList);
+  resultsList.innerHTML = '';
+  for (var i = 0; i < allImages.length; i++) {
+    var liEl = document.createElement('li');
+    liEl.textContent = allImages[i].name + ' has been selected ' + allImages[i].timesClicked + ' times';
+    resultsList.appendChild(liEl);
+
+  }
+}
 
 
 
