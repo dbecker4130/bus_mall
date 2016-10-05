@@ -11,6 +11,9 @@ var previousShown = [];
 var left = document.getElementById('left');
 var center = document.getElementById('center');
 var right = document.getElementById('right');
+var wrapperEl = document.getElementById('wrapper');
+var button = document.getElementById('button');
+var clickCounter = 0;
 
 function Image (name, filePath) {
   this.name = name;
@@ -50,26 +53,7 @@ new Image('wine-glass', 'img/wine-glass.jpg');
 function randomNumberGenerator () {
   return Math.floor(Math.random() * allImages.length);
 }
-//
-// imageNames.push(randomNumberGenerator());
-// imageNames.push(randomNumberGenerator());
-//
-// while (imageNames[1] === imageNames [0] || previousShown[0] === imageNames[1] || imageNames[1] === previousShown[1] || imageNames[1] === previousShown[2]) {
-//   console.log(imageNames, 'No duplicates between first and second picture');
-//   imageNames[0] = randomNumberGenerator();
-// }
-// imageNames.push(randomNumberGenerator());
-//
-// while (imageNames[2] === imageNames[0]) {
-//   console.log(imageNames, 'No duplicates between first and third picture');
-//   imageNames [1] = randomNumberGenerator();
-// }
-//
-// while (imageNames[2] === imageNames[1]) {
-//   console.log(imageNames, 'No dupicates between second and third picture');
-//   imageNames[2] = randomNumberGenerator();
-// }
-// console.log(imageNames);
+
 
 //Execute Actions
 //+++++++++++++++++++++++++++++++++++++++++
@@ -77,7 +61,7 @@ function randomNumberGenerator () {
 
 function displayPics() {
   //console.log('displayPics');
-  //var firstPic = document.getElementById('first_pic');
+
   var leftPic = randomNumberGenerator();
 
   while (leftPic === previousShown[0] || leftPic === previousShown[1] || leftPic === previousShown[2]) {
@@ -114,30 +98,32 @@ function displayPics() {
 
 }
 
-displayPics();
+function displayList() {
+  var resultsList = document.getElementById('resultsList');
+  console.log('resultsList', resultsList);
+  resultsList.innerHTML = '';
+  for (var i = 0; i < allImages.length; i++) {
+    var liEl = document.createElement('li');
+    liEl.textContent = allImages[i].name + ' has been selected ' + allImages[i].timesClicked + ' times';
+    resultsList.appendChild(liEl);
+  }
+}
 
-var wrapperEl = document.getElementById('wrapper');
-wrapperEl.addEventListener('click' , eventHandlerClick);
-
-var clickCounter = 0;
 function eventHandlerClick (event) {
   console.log('event handle click', event);
   clickCounter += 1;
   console.log(clickCounter, 'total clicks');
   var choice = event.target.id;
   console.log('allImages: ', allImages);
-//   for (var i = 0; i < allImages.length; i++){
-//     if(allImages[i].name === choice){
-//       allImages[i].timesClicked += 1;
-//       console.log(allImages[i].name + ' has ' + allImages[i].timesClicked + 'clicks');
-//     }
+
+
 //
 // //finds out which pictures were clicked
 // //converts from 'leftPic, centerPic, rightPic' to actual image name
 // //increases that events timesClicked by 1
 // //calls displayPics to reload wrapper with 3 new images
 //
-//   }
+//
 
   if(choice === 'left') {
     var leftPic = previousShown[0];
@@ -154,50 +140,76 @@ function eventHandlerClick (event) {
   }
 
   displayPics();
-
-
-
-
-
-
-}
-
-
-function displayList() {
-  var resultsList = document.getElementById('resultsList');
-  console.log('resultsList', resultsList);
-  resultsList.innerHTML = '';
-  for (var i = 0; i < allImages.length; i++) {
-    var liEl = document.createElement('li');
-    liEl.textContent = allImages[i].name + ' has been selected ' + allImages[i].timesClicked + ' times';
-    resultsList.appendChild(liEl);
-
+  if (clickCounter === 25) {
+    wrapperEl.removeEventListener('click', eventHandlerClick);
+    button.addEventListener('click', drawChart);
+    // displayList(?);
   }
+
 }
 
 
 
+//++++++++++++++++++++++++++++++++++++++++++
+//CHART
+function drawChart() {
 
 
+  var imgName = [];
+  var votes = [];
+  for (var i = 0; i < allImages.length; i++) {
+    imgName.push(allImages[i].name);
+    console.log('heyyyyy' + allImages[i].name);
+    votes.push(allImages[i].timesClicked);
+  }
 
-// Jed function
-// function randomImgs() {
-//    var images = [];
-//    for (var i = 0; i < numImgs; i++) {
-//        if (imgCache.length <= 13) {
-//            imgCache = imgArr.slice(0);
-//        }
-//        var index = Math.floor(Math.random() * imgCache.length);
-//        var random = imgCache[index];
-//        console.log('random', random.id);
-//        imgCache.splice(index, 1);
-//        console.log('imgCache', imgCache.length);
-//        images.push(random);
-//    }
-//    return images;
-// }
-//
-// external variables
-//
-// var imgArr = [];
-// var imgCache = imgArr.slice(0);
+  var ctx = document.getElementById('image-chart');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: imgName,
+      datasets: [{
+        label: '# of Votes',
+        data: votes,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(2, 159, 64, 79)',
+          'rgba(255, 159, 622, 0.5)',
+          'rgba(5, 1, 64, 5)',
+          'rgba(255, 100, 64, 0.5)',
+          'rgba(100, 159, 64, 0.5)',
+          'rgba(255, 159, 64, 30)',
+          'rgba(255, 0, 0, 0.5)',
+          'rgba(255, 1, 64, 0.5)',
+          'rgba(255, 159, 64, 0.5)',
+          'rgba(255, 300, 64, 0.5)',
+          'rgba(255, 119, 114, 0.5)',
+          'rgba(2, 15, 64, 0.5)',
+          'rgba(2, 1, 0, 50)',
+        ],
+      }]
+    },
+    options: {
+      responsive: false,
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true,
+            stepSize:1,
+            max: 8,
+            min: 0
+          }
+        }]
+      }
+    }
+  });
+}
+
+
+displayPics();
+wrapperEl.addEventListener('click' , eventHandlerClick);
