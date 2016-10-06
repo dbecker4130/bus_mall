@@ -1,11 +1,27 @@
+* {
+  background-color: #7D290A;
+}
+
+header {
+  text-align: center;
+
+}
+
 img {
   max-width: 400px;
   min-width: 399px;
   max-height: 300px;
   min-height: 299px;
+  box-shadow: 10px 10px 5px #558C89;
 
 }
 
-.wrapper {
-  box-shadow: 10px 10px 5px #888888;
+div {
+  padding: 10px;
+  background-color: #74AFAD;
+  margin-right: 325px;
+  margin-left: 325px;
+}
+button {
+  background-color: #558C89;
 }
