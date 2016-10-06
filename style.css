@@ -3,5 +3,9 @@ img {
   min-width: 399px;
   max-height: 300px;
   min-height: 299px;
-  
+
+}
+
+.wrapper {
+  box-shadow: 10px 10px 5px #888888;
 }
