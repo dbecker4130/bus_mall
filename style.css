@@ -1,7 +1,47 @@
+* {
+  background-color: #B74212;
+
+}
+
+header {
+  text-align: center;
+  font-family: 'Amatic SC', cursive;
+  font-size: 50px;
+  color: white;
+
+
+}
+
 img {
   max-width: 400px;
   min-width: 399px;
   max-height: 300px;
   min-height: 299px;
-  
+  box-shadow: 10px 10px 5px #558C89;
+
+}
+
+div {
+  padding: 10px;
+  background-color: #74AFAD;
+  margin-right: 325px;
+  margin-left: 325px;
+}
+section {
+  margin: 30px;
+
+}
+button {
+  background-color: #558C89;
+  margin-left: 825px;
+  font-family: 'Amatic SC', cursive;
+  font-size: 20px;
+  padding: 5px;
+  border: 2px;
+  color: white;
+
+}
+canvas {
+  margin-left: 520px;
+  color: #000;
 }

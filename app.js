@@ -3,9 +3,6 @@
 //set up data
 var allImages = [];
 var previousShown = [];
-//var currentShown = [];
-
-//var imageNames = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
 
 //var imageWrapper = document.getElementById('wrapper');  need to create click outside pic error message
 var left = document.getElementById('left');
@@ -166,7 +163,7 @@ function drawChart() {
   var votes = [];
   for (var i = 0; i < allImages.length; i++) {
     imgName.push(allImages[i].name);
-    console.log('heyyyyy' + allImages[i].name);
+    console.log('Image' + allImages[i].name);
     votes.push(allImages[i].timesClicked);
   }
 
