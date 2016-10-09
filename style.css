@@ -1,9 +1,14 @@
 * {
-  background-color: #7D290A;
+  background-color: #B74212;
+
 }
 
 header {
   text-align: center;
+  font-family: 'Amatic SC', cursive;
+  font-size: 50px;
+  color: white;
+
 
 }
 
@@ -22,6 +27,21 @@ div {
   margin-right: 325px;
   margin-left: 325px;
 }
+section {
+  margin: 30px;
+
+}
 button {
   background-color: #558C89;
+  margin-left: 825px;
+  font-family: 'Amatic SC', cursive;
+  font-size: 20px;
+  padding: 5px;
+  border: 2px;
+  color: white;
+
+}
+canvas {
+  margin-left: 520px;
+  color: #000;
 }
