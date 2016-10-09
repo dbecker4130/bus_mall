@@ -4,12 +4,12 @@
 var allImages = [];
 var previousShown = [];
 
-//var imageWrapper = document.getElementById('wrapper');  need to create click outside pic error message
 var left = document.getElementById('left');
 var center = document.getElementById('center');
 var right = document.getElementById('right');
 var wrapperEl = document.getElementById('wrapper');
 var button = document.getElementById('button');
+
 var clickCounter = 0;
 
 function Image (name, filePath) {
@@ -40,12 +40,6 @@ new Image('usb', 'img/usb.gif');
 new Image('water-can', 'img/water-can.jpg');
 new Image('wine-glass', 'img/wine-glass.jpg');
 
-//console.log('allImages', allImages);
-//Define Actions
-
-// for (var i = 0; i < imageNames.length; i++) {
-//   allImages.push(new Image(imageNames[i]));
-// }
 
 function randomNumberGenerator () {
   return Math.floor(Math.random() * allImages.length);
@@ -95,17 +89,6 @@ function displayPics() {
 
 }
 
-// function displayList() {
-//   var resultsList = document.getElementById('resultsList');
-//   console.log('resultsList', resultsList);
-//   resultsList.innerHTML = '';
-//   for (var i = 0; i < allImages.length; i++) {
-//     var liEl = document.createElement('li');
-//     liEl.textContent = allImages[i].name + ' has been selected ' + allImages[i].timesClicked + ' times';
-//     resultsList.appendChild(liEl);
-//   }
-// }
-
 function eventHandlerClick (event) {
   console.log('event handle click', event);
   clickCounter += 1;
@@ -144,15 +127,9 @@ function eventHandlerClick (event) {
       var data = JSON.stringify(allImages);
       localStorage.setItem('data', data);
     }
-    // displayList(?);
     storeData();
   }
-
 }
-
-
-
-
 
 //++++++++++++++++++++++++++++++++++++++++++
 //CHART
@@ -205,7 +182,7 @@ function drawChart() {
           ticks: {
             beginAtZero:true,
             stepSize:1,
-            max: 8,
+            max: 15,
             min: 0
           }
         }]

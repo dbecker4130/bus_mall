@@ -1,6 +1,5 @@
 * {
   background-color: #B74212;
-
 }
 
 header {
@@ -8,8 +7,6 @@ header {
   font-family: 'Amatic SC', cursive;
   font-size: 50px;
   color: white;
-
-
 }
 
 img {
@@ -27,10 +24,11 @@ div {
   margin-right: 325px;
   margin-left: 325px;
 }
+
 section {
   margin: 30px;
-
 }
+
 button {
   background-color: #558C89;
   margin-left: 825px;
@@ -39,8 +37,8 @@ button {
   padding: 5px;
   border: 2px;
   color: white;
-
 }
+
 canvas {
   margin-left: 520px;
   color: #000;
